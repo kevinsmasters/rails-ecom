@@ -24,7 +24,7 @@
   <div class="my-5">
     <% if admin_product.images.any? %>
       <% admin_product.images.each do |img| %>
-        <%= image_tag img, class: 'w-5 h-5 object-cover rounded-md' %>
+        <%= image_tag img, class: "w-10 h-10 object-cover rounded-md" %>
       <% end %>
     <% end %>
     <%= form.label :images %>
