@@ -3,7 +3,7 @@ class Admin::StocksController < AdminController
 
   # GET /admin/stocks or /admin/stocks.json
   def index
-    @admin_stocks = Stock.all
+    @admin_stocks = Stock.where(product_id: params[:product_id])
   end
 
   # GET /admin/stocks/1 or /admin/stocks/1.json
@@ -18,6 +18,8 @@ class Admin::StocksController < AdminController
 
   # GET /admin/stocks/1/edit
   def edit
+    @product = Product.find(params[:product_id])
+    @admin_stock = Stock.find(params[:id])
   end
 
   # POST /admin/stocks or /admin/stocks.json
