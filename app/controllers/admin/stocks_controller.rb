@@ -12,7 +12,7 @@ class Admin::StocksController < AdminController
 
   # GET /admin/stocks/new
   def new
-    @admin_product = Product.find(params[:product_id])
+    @product = Product.find(params[:product_id])
     @admin_stock = Stock.new
   end
 
@@ -22,11 +22,12 @@ class Admin::StocksController < AdminController
 
   # POST /admin/stocks or /admin/stocks.json
   def create
-    @admin_stock = Stock.new(admin_stock_params)
+    @product = Product.find(params[:product_id])
+    @admin_stock = @product.stocks.new(admin_stock_params)
 
     respond_to do |format|
       if @admin_stock.save
-        format.html { redirect_to admin_stock_url(@admin_stock), notice: "Stock was successfully created." }
+        format.html { redirect_to admin_product_stock_url(@product, @admin_stock), notice: "Stock was successfully created." }
         format.json { render :show, status: :created, location: @admin_stock }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +40,7 @@ class Admin::StocksController < AdminController
   def update
     respond_to do |format|
       if @admin_stock.update(admin_stock_params)
-        format.html { redirect_to admin_stock_url(@admin_stock), notice: "Stock was successfully updated." }
+        format.html { redirect_to admin_product_stock_url(@admin_stock.product, @admin_stock), notice: "Stock was successfully updated." }
         format.json { render :show, status: :ok, location: @admin_stock }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +54,7 @@ class Admin::StocksController < AdminController
     @admin_stock.destroy!
 
     respond_to do |format|
-      format.html { redirect_to admin_stocks_url, notice: "Stock was successfully destroyed." }
+      format.html { redirect_to admin_product_stocks_url, notice: "Stock was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -66,6 +67,6 @@ class Admin::StocksController < AdminController
 
     # Only allow a list of trusted parameters through.
     def admin_stock_params
-      params.require(:admin_stock).permit(:product_id, :amount, :size)
+      params.require(:admin_stock).permit(:amount, :size)
     end
 end
