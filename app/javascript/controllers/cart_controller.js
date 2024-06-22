@@ -51,8 +51,8 @@ export default class extends Controller {
       authenticity_token: "",
       cart: cart
     }
-
-    const csrfToken = document.querySelector("[name='csrfToken']").content
+    
+    const csrfToken = document.querySelector("[name='csrf-token']").content
 
     fetch("/checkout", {
       method: "POST",
