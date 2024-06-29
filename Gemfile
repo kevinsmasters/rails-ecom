@@ -76,3 +76,6 @@ gem "font-awesome-sass", "~> 6.5.1"
 gem "stripe", "~> 11.7"
 
 gem "pagy", "~> 8.5"
+
+source "https://rubygems.org"
+gem "rspec"
