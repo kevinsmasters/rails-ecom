@@ -1,5 +1,12 @@
-Rspec.describe HomeController do
+require './app/controllers/home_controller'
+describe HomeController do
   describe '#index' do
-    # take 4 categories
+    (1..6).each do |i|
+      Category.create(name: "Category #{i}", description: "Category description #{i}")
+    end
+    it 'takes 4 categories' do
+      # take 4 categories
+      expect(false).to be(true)
+    end
   end
 end
